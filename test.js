@@ -151,6 +151,6 @@
         window.onresize = () => onWindowResize(canvas);
         onWindowResize(canvas);
 
-        const text = new textBox(0, ySize-300, xSize, 300, "Hihi12410", "/images/touhou.webp",300, testText, "white", "system-ui", 30, 1, "blue", .9, .9, ctx);
+        const text = new textBox(0, ySize-300, xSize, 300, "Hihi12410", "./images/touhou.webp",300, testText, "white", "system-ui", 30, 1, "blue", .9, .9, ctx);
         mainLoop(text, ctx);
     };

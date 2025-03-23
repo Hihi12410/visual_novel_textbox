@@ -1,0 +1,19 @@
+html, body
+{
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+}
+
+canvas
+{
+    background-image: url("https://gyongyosma.hu/wp-content/uploads/2024/09/a4b19bd4-1e67-4d2f-ad87-b19dfdb75112.jpeg");
+    width: 100vw;
+    height: 100vh;
+}

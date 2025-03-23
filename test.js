@@ -267,8 +267,8 @@ window.onload = function () {
             switchtb();
         }
     }
-    window.ontouchstart = function(e) 
-    {
-        switchtb();
-    }
+    //window.ontouchstart = function(e) 
+    //{
+        //switchtb();
+    //}
 };

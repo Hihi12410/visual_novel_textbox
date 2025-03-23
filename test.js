@@ -236,20 +236,39 @@ window.onload = function () {
     const text = new textBox(vtbs);
     const evilText = new textBox(vtbs2);
 
-    window.onclick = function()
+    let a = 0;
+    function switchtb() 
     {
-        stopAllWrite();
-        ctx.clearRect(0,0,xSize, ySize);
-        text.show();
-    }
-
-    window.onkeypress = function (e)
-    {
-        if (e.key == ' ') 
-            {
+        if (a == 0) 
+        {
+            a = 1;
+            stopAllWrite();
+            ctx.clearRect(0,0,xSize, ySize);
+            text.show();
+        }
+        else
+        {
+            a = 0;
             stopAllWrite();
             ctx.clearRect(0,0,xSize, ySize);
             evilText.show();
         }
+    }
+
+    window.onclick = function()
+    {
+        switchtb();
+    }
+
+    window.onkeypress = function (e)
+    {
+        if (e.key == ' ' || e.key == '\n') 
+        {
+            switchtb();
+        }
+    }
+    window.ontouchstart = function(e) 
+    {
+        switchtb();
     }
 };

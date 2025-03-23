@@ -151,6 +151,6 @@
         window.onresize = () => onWindowResize(canvas);
         onWindowResize(canvas);
 
-        const text = new textBox(0, ySize-300, xSize, 300, "Hihi12410", "https://www.touhou-newworld.com/images/character-reimu_sp.webp",300, testText, "white", "system-ui", 30, 1, "blue", .9, .9, ctx);
+        const text = new textBox(0, ySize-300, xSize, 300, "Hihi12410", "/images/touhou.webp",300, testText, "white", "system-ui", 30, 1, "blue", .9, .9, ctx);
         mainLoop(text, ctx);
     };

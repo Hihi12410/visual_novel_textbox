@@ -13,7 +13,7 @@ html, body
 
 canvas
 {
-    background-image: url("https://gyongyosma.hu/wp-content/uploads/2024/09/a4b19bd4-1e67-4d2f-ad87-b19dfdb75112.jpeg");
+    background-image: url("/images/duranda.jpeg");
     width: 100vw;
     height: 100vh;
 }

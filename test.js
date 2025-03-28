@@ -1,4 +1,4 @@
-import { VisualTextBoxStyle, textBox, stopAllWrite } from './textbox.js';
+import { VisualTextBoxStyle, textBox, stopAllWrite, loadBackground } from './textbox.js';
 import { stageMaster } from './staging.js'
 
 var xSize = 0;
@@ -18,13 +18,12 @@ function onWindowResize(canvas) {
 }
 
 
-const welcomeTitle1 = "Once upon a time..."
-const welcomeTitle2 = "Let's meet our character!"
-const characterText1 = "Hello! I am the main character! Lets have a lot of fun!"
-const characterText2 = "Oh no! Who is that?"
-const evilText = "I am the big evil antagonist of this story! I'll cut it short right here!"
-const ohno1 = "Oh noes!"
-const ohno2 = "Goodbye!"
+const welcomeTitle1 = "Egyszer volt, hol nem volt..."
+const characterText1 = "Be szép ez a nap! Ma semmi rossz nem történhet..."
+const characterText2 = "Ó jaj! Te meg ki vagy?"
+const evilText = "Az adóhivatalból Jöttünk. Jelenleg egy gazillió forinttal tartozik a magyar államnak!"
+const ohno1 = "Jaj ne! Csak az adóhivatalt ne!"
+const ohno2 = "Ez a vég."
 
 window.onload = function () {
     const canvas = document.getElementById("canvas");
@@ -37,8 +36,8 @@ window.onload = function () {
         0,
         ySize-300,
         xSize, 300,
-        "Man",
-        "https://media.gettyimages.com/id/1141508304/photo/portrait-of-smiling-tattooed-man-with-arms-crossed.jpg?s=170667a&w=gi&k=20&c=DWwC_IdHb0NJVYSiLIaSka0cYyuEWQhqiEUGuak99IY=",
+        "József",
+        "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_13146336.png",
         300,
         characterText1,
         "white",
@@ -55,8 +54,8 @@ window.onload = function () {
         0,
         ySize-300,
         xSize, 300,
-        "Evil",
-        "https://cdn-icons-png.flaticon.com/512/4332/4332684.png",
+        "Zsaru",
+        "https://sapoa.org/wp-content/uploads/2022/06/officers-resized.png",
         300,
         evilText,
         "white",
@@ -93,20 +92,10 @@ window.onload = function () {
 
     const sm = new stageMaster(canvas, [], stopAllWrite);
     sm.addObject(() => {narrator.setText(welcomeTitle1); canvas.style.backgroundColor="white"; narrator.show()});
-    sm.addObject(() => {narrator.setText(welcomeTitle2); narrator.show()});
     sm.addObject(() => {man.setText(characterText1); canvas.style.backgroundColor="grey"; man.show()});
     sm.addObject(() => {man.setText(characterText2); man.show()});
     sm.addObject(async () => {
-        antagonist.setText(evilText);
-        const bgImage = new Image();
-        bgImage.src = './hell.jpeg';
-        
-        await new Promise((resolve, reject) => {
-            bgImage.onload = () => resolve();
-            bgImage.onerror = reject;
-        });
-    
-        ctx.drawImage(bgImage, 0, 0, xSize, ySize);
+        loadBackground("https://www.ujbuda.hu/sites/default/files/attachments/pictures/ujbudahu/2018_01/nav_mti.jpg", ctx, xSize, ySize);
         antagonist.show();
     });
     

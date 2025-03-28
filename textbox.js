@@ -6,6 +6,19 @@ export function stopAllWrite()
     if (writeOrder > 10000000) writeOrder = 0;
 }
 
+export async function loadBackground(url, ctx, xSize, ySize) 
+{
+    const bgImage = new Image();
+    bgImage.src = './hell.jpeg';
+        
+    await new Promise((resolve, reject) => {
+        bgImage.onload = () => resolve();
+        bgImage.onerror = reject;
+    });
+    
+    ctx.drawImage(bgImage, 0, 0, xSize, ySize);
+}
+
 export class VisualTextBoxStyle 
 {
     constructor(x, y, w, h, title, image, imageSize, text, textcolor, font, fontsize, duration, backgroundGradientColor, backgroundGradientRatio, titleCardGradientRatio, ctx, headless)
@@ -197,7 +210,7 @@ export class textBox {
             setTimeout(() => this.show(), 500);
             return;
         }
-        
+
         this.vtbs.ctx.font = `${this.vtbs.fontsize}px ${this.vtbs.font}`;
         this.renderBackground();
         this.renderTitleCard();

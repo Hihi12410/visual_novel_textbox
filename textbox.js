@@ -37,6 +37,7 @@ export class VisualTextBoxStyle
         this.titleCardGradient.addColorStop(0, backgroundGradientColor);
         this.titleCardGradient.addColorStop(titleCardGradientRatio, "rgba(0, 0, 0, 0.5)");
         this.titleCardGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+        this.writeOrder = writeOrder;
     }
 }
 
@@ -185,11 +186,9 @@ export class textBox {
             return;
         }
 
-        if (this.writeOrder != writeOrder) return;
-
         this.vtbs.ctx.font = `${this.vtbs.fontsize}px ${this.vtbs.font}`;
-        this.renderBackground();
-        this.renderTitleCard();
+        //this.renderBackground();
+        his.renderTitleCard();
         this.renderText_typeWriter();
     }
 }

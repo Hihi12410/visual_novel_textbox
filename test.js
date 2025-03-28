@@ -71,7 +71,7 @@ window.onload = function () {
     
     const narratorStyle = new VisualTextBoxStyle(
         0,
-        (ySize / 2) -300,
+        (ySize / 2) -300/2,
         xSize, 300,
         "Narrator",
         "",

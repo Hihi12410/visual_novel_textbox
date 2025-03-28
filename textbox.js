@@ -8,7 +8,7 @@ export function stopAllWrite()
 
 export class VisualTextBoxStyle 
 {
-    constructor(x, y, w, h, title, image, imageSize, text, textcolor, font, fontsize, duration, backgroundGradientColor, backgroundGradientRatio, titleCardGradientRatio, ctx)
+    constructor(x, y, w, h, title, image, imageSize, text, textcolor, font, fontsize, duration, backgroundGradientColor, backgroundGradientRatio, titleCardGradientRatio, ctx, headless)
     {
         this.ctx = ctx;
         
@@ -38,6 +38,7 @@ export class VisualTextBoxStyle
         this.titleCardGradient.addColorStop(titleCardGradientRatio, "rgba(0, 0, 0, 0.5)");
         this.titleCardGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
         this.writeOrder = writeOrder;
+        this.headless = headless;
     }
 }
 
@@ -50,7 +51,7 @@ export class textBox {
             this.loaded = true;
         };
     }
-        
+
     wrapText() {
         let words = this.vtbs.text.split(" ");
         let lines = [];
@@ -187,8 +188,8 @@ export class textBox {
         }
 
         this.vtbs.ctx.font = `${this.vtbs.fontsize}px ${this.vtbs.font}`;
-        //this.renderBackground();
-        his.renderTitleCard();
+        this.renderBackground();
+        if (!this.vtbs.headless)this.renderTitleCard();
         this.renderText_typeWriter();
     }
 }

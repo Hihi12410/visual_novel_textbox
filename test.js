@@ -92,15 +92,31 @@ window.onload = function () {
 
     const sm = new stageMaster(canvas, [], stopAllWrite);
     sm.addObject(() => {narrator.setText(welcomeTitle1); canvas.style.backgroundColor="white"; narrator.show()});
-    sm.addObject(() => {man.setText(characterText1); canvas.style.backgroundColor="grey"; man.show()});
-    sm.addObject(() => {man.setText(characterText2); man.show()});
+    sm.addObject(async () => 
+        {
+            await loadBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaAP8BGC69CSOWBrsLbFsgRE1grNHc0L-Yg&s", ctx, xSize, ySize);
+            man.setText(characterText1);
+            man.show();
+        });
+    sm.addObject(async () => 
+        {
+            await loadBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaAP8BGC69CSOWBrsLbFsgRE1grNHc0L-Yg&s", ctx, xSize, ySize);
+            man.setText(characterText2);
+            man.show()
+        });
     sm.addObject(async () => {
-        loadBackground("https://www.ujbuda.hu/sites/default/files/attachments/pictures/ujbudahu/2018_01/nav_mti.jpg", ctx, xSize, ySize);
+        await loadBackground("https://www.ujbuda.hu/sites/default/files/attachments/pictures/ujbudahu/2018_01/nav_mti.jpg", ctx, xSize, ySize);
         antagonist.show();
     });
     
     sm.addObject(() => {man.setText(ohno1); canvas.style.backgroundColor="black"; man.show()});
     sm.addObject(() => {man.setText(ohno2); man.show()});
+    sm.addObject(async() => 
+    {
+        await loadBackground("https://news.mit.edu/sites/default/files/images/202409/MIT-PrisonHeat-01.jpg", ctx, xSize, ySize);
+        man.setText("[Vége.]"); man.show()
+    });
+
 
     window.onclick = function()
     {

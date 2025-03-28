@@ -6,18 +6,19 @@ export function stopAllWrite()
     if (writeOrder > 10000000) writeOrder = 0;
 }
 
-export async function loadBackground(url, ctx, xSize, ySize) 
-{
+export async function loadBackground(url, ctx, xSize, ySize) {
     const bgImage = new Image();
-    bgImage.src = './hell.jpeg';
-        
+    bgImage.src = url;
+    
     await new Promise((resolve, reject) => {
         bgImage.onload = () => resolve();
-        bgImage.onerror = reject;
+        bgImage.onerror = (err) => reject(err);
     });
     
+    ctx.clearRect(0, 0, xSize, ySize);
     ctx.drawImage(bgImage, 0, 0, xSize, ySize);
 }
+
 
 export class VisualTextBoxStyle 
 {

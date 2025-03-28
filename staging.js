@@ -2,6 +2,7 @@ export class stageMaster
 {
     constructor(canvas, objects, handleTextBoxShowStop) {
         this.objects = [];
+
         objects.forEach(object => {
             this.objects.push(object)
         });
@@ -21,7 +22,7 @@ export class stageMaster
     {
         this.handleTextBoxShowStop();
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.objects[this.currentIndex].show();
+        this.objects[this.currentIndex]();
     }
 
     nextSlide() 

@@ -18,10 +18,12 @@ export class VisualTextBoxStyle
         this.h = h;
         
         this.title = title;
+        this.headless = headless;
+    
         this.image = new Image();
         this.image.src = image;
-        this.imageSize = imageSize;
-        
+        this.imageSize = imageSize;        
+
         this.text = text;
         this.textcolor = textcolor;
         this.font = font;
@@ -38,18 +40,23 @@ export class VisualTextBoxStyle
         this.titleCardGradient.addColorStop(titleCardGradientRatio, "rgba(0, 0, 0, 0.5)");
         this.titleCardGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
         this.writeOrder = writeOrder;
-        this.headless = headless;
     }
 }
 
 export class textBox {
     constructor(vtbs) {
-        //Loading images and files
-        this.loaded = false;
-        this.vtbs = vtbs;    
-        this.vtbs.image.onload = () => {
+        this.vtbs = vtbs;
+        
+        if (!this.vtbs.headless)
+        {
+            this.loaded = false;
+            this.vtbs.image.onload = () => {
+                this.loaded = true;
+            };
+        }else
+        {
             this.loaded = true;
-        };
+        }
     }
 
     wrapText() {
@@ -95,22 +102,26 @@ export class textBox {
     renderTitleCard() 
     {
         const imageAspectRatio = this.vtbs.image.width / this.vtbs.image.height;
-        let imageWidth = this.vtbs.imageSize;
-        let imageHeight = imageWidth / imageAspectRatio;
-        
-        if (imageHeight > this.vtbs.h) {
-            imageHeight = this.vtbs.h;
-            imageWidth = imageHeight * imageAspectRatio;
+            let imageWidth = this.vtbs.imageSize;
+            let imageHeight = imageWidth / imageAspectRatio;
+            
+            if (imageHeight > this.vtbs.h) {
+                imageHeight = this.vtbs.h;
+                imageWidth = imageHeight * imageAspectRatio;
+            }
+
+            const imageX = this.vtbs.x;
+            const imageY = this.vtbs.y - this.vtbs.imageSize;
+
+        if (!this.vtbs.headless){
+            
+            
+            this.vtbs.ctx.fillStyle = this.vtbs.titleCardGradient;
+            this.vtbs.ctx.fillRect(imageX, imageY, this.vtbs.imageSize, this.vtbs.imageSize);
+            
+            this.vtbs.ctx.drawImage(this.vtbs.image, imageX, imageY, this.vtbs.imageSize, this.vtbs.imageSize);
         }
-        
-        const imageX = this.vtbs.x;
-        const imageY = this.vtbs.y - this.vtbs.imageSize;
-        
-        this.vtbs.ctx.fillStyle = this.vtbs.titleCardGradient;
-        this.vtbs.ctx.fillRect(imageX, imageY, this.vtbs.imageSize, this.vtbs.imageSize);
-        
-        this.vtbs.ctx.drawImage(this.vtbs.image, imageX, imageY, this.vtbs.imageSize, this.vtbs.imageSize);
-        
+
         this.vtbs.ctx.fillStyle = this.vtbs.textcolor;
         this.vtbs.ctx.fillText(this.vtbs.title, imageX, imageY+this.vtbs.imageSize);
     }
@@ -183,13 +194,14 @@ export class textBox {
     
     show() {
         if (!this.loaded) {
-            setTimeout(this.show(), 500);
+            setTimeout(() => this.show(), 500);
             return;
         }
-
+        
         this.vtbs.ctx.font = `${this.vtbs.fontsize}px ${this.vtbs.font}`;
         this.renderBackground();
-        if (!this.vtbs.headless)this.renderTitleCard();
+        this.renderTitleCard();
         this.renderText_typeWriter();
     }
+    
 }

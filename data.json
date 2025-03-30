@@ -1,0 +1,18 @@
+{
+    "type" : "image",
+    "links" : 
+    [
+        {
+            "name" : "manImage",
+            "link" : "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_13146336.png"
+        },
+        {
+            "name" : "womanImage",
+            "link" : "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_13146336.png"
+        },
+        {
+            "name" : "arab",
+            "link" : "https://www.travelandtourworld.com/wp-content/uploads/2024/10/Saudi-Arabia-Riyadh.jpg"
+        }
+    ]
+}

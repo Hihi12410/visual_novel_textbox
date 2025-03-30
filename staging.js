@@ -35,4 +35,15 @@ export class stageMaster
         this.currentIndex = 0;
         this.slidePresent();
     }
+
+    windowResizeHook()
+    {
+        this.objects.forEach((obj) => 
+        {
+            if (obj.onWindowResize != undefined) 
+            {
+                obj.onWindowResize();
+            }
+        });  
+    }   
 }

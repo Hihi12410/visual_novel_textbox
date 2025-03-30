@@ -6,37 +6,37 @@ export function stopAllWrite()
     if (writeOrder > 10000000) writeOrder = 0;
 }
 
-export async function loadBackground(url, ctx, xSize, ySize) {
-    const bgImage = new Image();
-    bgImage.src = url;
-    
-    await new Promise((resolve, reject) => {
-        bgImage.onload = () => resolve();
-        bgImage.onerror = (err) => reject(err);
-    });
+export function drawBg(img, ctx, xSize, ySize) {
     
     ctx.clearRect(0, 0, xSize, ySize);
-    ctx.drawImage(bgImage, 0, 0, xSize, ySize);
+    ctx.drawImage(img, 0, 0, xSize, ySize);
 }
 
 
 export class VisualTextBoxStyle 
 {
-    constructor(x, y, w, h, title, image, imageSize, text, textcolor, font, fontsize, duration, backgroundGradientColor, backgroundGradientRatio, titleCardGradientRatio, ctx, headless)
+    constructor(x_ratio, y_ratio, w_ratio, h_ratio, window_x, window_y, title, image, imageSize, text, textcolor, font, fontsize, duration, backgroundGradientColor, backgroundGradientRatio, titleCardGradientRatio, ctx, headless)
     {
         this.ctx = ctx;
         
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+        this.x_ratio = x_ratio;
+        this.y_ratio = y_ratio;
+        this.w_ratio = w_ratio;
+        this.h_ratio = h_ratio;
+
+        this.window_x = window_x;
+        this.window_y = window_y;
+
+        this.x = x_ratio * window_x;
+        this.y = y_ratio * window_y;
+        this.w = w_ratio * window_x;
+        this.h = h_ratio * window_y
         
         this.title = title;
         this.headless = headless;
     
-        this.image = new Image();
-        this.image.src = image;
-        this.imageSize = imageSize;        
+        this.image = image;
+        this.imageSize = imageSize;
 
         this.text = text;
         this.textcolor = textcolor;
@@ -60,17 +60,6 @@ export class VisualTextBoxStyle
 export class textBox {
     constructor(vtbs) {
         this.vtbs = vtbs;
-        
-        if (!this.vtbs.headless)
-        {
-            this.loaded = false;
-            this.vtbs.image.onload = () => {
-                this.loaded = true;
-            };
-        }else
-        {
-            this.loaded = true;
-        }
     }
 
     wrapText() {
@@ -129,10 +118,9 @@ export class textBox {
 
         if (!this.vtbs.headless){
             
-            
             this.vtbs.ctx.fillStyle = this.vtbs.titleCardGradient;
             this.vtbs.ctx.fillRect(imageX, imageY, this.vtbs.imageSize, this.vtbs.imageSize);
-            
+
             this.vtbs.ctx.drawImage(this.vtbs.image, imageX, imageY, this.vtbs.imageSize, this.vtbs.imageSize);
         }
 
@@ -207,15 +195,22 @@ export class textBox {
     }
     
     show() {
-        if (!this.loaded) {
-            setTimeout(() => this.show(), 500);
-            return;
-        }
-
         this.vtbs.ctx.font = `${this.vtbs.fontsize}px ${this.vtbs.font}`;
         this.renderBackground();
         this.renderTitleCard();
         this.renderText_typeWriter();
+    }
+
+    onWindowResize() 
+    {
+        this.window_x = this.vtbs.ctx.canvas.width;
+        this.window_y = this.vtbs.ctx.canvas.height;
+
+        this.x = x_ratio * window_x;
+        this.y = y_ratio * window_y;
+        this.w = w_ratio * window_x;
+        this.h = h_ratio * window_y
+
     }
     
 }

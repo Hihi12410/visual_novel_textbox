@@ -1,5 +1,6 @@
-import { VisualTextBoxStyle, textBox, stopAllWrite, loadBackground } from './textbox.js';
+import { VisualTextBoxStyle, textBox, stopAllWrite, drawBg } from './textbox.js';
 import { stageMaster } from './staging.js'
+import { Loader } from './loader.js';
 
 var xSize = 0;
 var ySize = 0;
@@ -17,7 +18,6 @@ function onWindowResize(canvas) {
     ySize = canvas.height;
 }
 
-
 const welcomeTitle1 = "Egyszer volt, hol nem volt..."
 const characterText1 = "Be szép ez a nap! Ma semmi rossz nem történhet..."
 const characterText2 = "Ó jaj! Te meg ki vagy?"
@@ -25,87 +25,39 @@ const evilText = "Az adóhivatalból Jöttünk. Jelenleg egy gazillió forinttal
 const ohno1 = "Jaj ne! Csak az adóhivatalt ne!"
 const ohno2 = "Ez a vég."
 
-window.onload = function () {
+    
+window.onload = async function () {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
+    const images = await Loader.loadImages("./data.json");
     
-    window.onresize = () => onWindowResize(canvas);
+    window.onresize += onWindowResize(canvas);
     onWindowResize(canvas);
     
-    const manStyle = new VisualTextBoxStyle(
-        0,
-        ySize-300,
-        xSize, 300,
-        "József",
-        "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_13146336.png",
-        300,
-        characterText1,
-        "white",
-        "system-ui",
-        27,
-        200,
-        "blue",
-        .9,
-        .9,
-        ctx,
-        false);
-
-    const antagonistStlye = new VisualTextBoxStyle(
-        0,
-        ySize-300,
-        xSize, 300,
-        "Zsaru",
-        "https://sapoa.org/wp-content/uploads/2022/06/officers-resized.png",
-        300,
-        evilText,
-        "white",
-        "system-ui",
-        27,
-        200,
-        "red",
-        .9,
-        .9,
-        ctx,
-        false);
+    const manStyle = new VisualTextBoxStyle(0, 0.8, 1, 0.2, xSize, ySize, "Title", images["manImage"], 100, "Hi", "white", "system-ui", 20, .1, "white", .1, .1, ctx, false);
     
-    const narratorStyle = new VisualTextBoxStyle(
-        0,
-        (ySize / 2) -300/2,
-        xSize, 300,
-        "Narrator",
-        "",
-        300,
-        welcomeTitle1,
-        "white",
-        "system-ui",
-        27,
-        200,
-        "black",
-        .9,
-        .9,
-        ctx,
-        true);
-    
-    const man = new textBox(manStyle)
-    const antagonist = new textBox(antagonistStlye);
-    const narrator = new textBox(narratorStyle) 
+    const man = new textBox(manStyle);
+    const antagonist = new textBox(manStyle);
+    const narrator = new textBox(manStyle);
 
     const sm = new stageMaster(canvas, [], stopAllWrite);
+
+    window.onresize += sm.windowResizeHook;
     sm.addObject(() => {narrator.setText(welcomeTitle1); canvas.style.backgroundColor="white"; narrator.show()});
     sm.addObject(async () => 
         {
-            await loadBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaAP8BGC69CSOWBrsLbFsgRE1grNHc0L-Yg&s", ctx, xSize, ySize);
+            drawBg(images["manImage"], ctx, xSize, ySize);
             man.setText(characterText1);
             man.show();
         });
     sm.addObject(async () => 
         {
-            await loadBackground("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKaAP8BGC69CSOWBrsLbFsgRE1grNHc0L-Yg&s", ctx, xSize, ySize);
+            drawBg(images["arab"], ctx, xSize, ySize);
             man.setText(characterText2);
             man.show()
         });
     sm.addObject(async () => {
-        await loadBackground("https://www.ujbuda.hu/sites/default/files/attachments/pictures/ujbudahu/2018_01/nav_mti.jpg", ctx, xSize, ySize);
+        drawBg(images["manImage"], ctx, xSize, ySize);;
         antagonist.show();
     });
     
@@ -113,7 +65,7 @@ window.onload = function () {
     sm.addObject(() => {man.setText(ohno2); man.show()});
     sm.addObject(async() => 
     {
-        await loadBackground("https://news.mit.edu/sites/default/files/images/202409/MIT-PrisonHeat-01.jpg", ctx, xSize, ySize);
+        drawBg(images["arab"], ctx, xSize, ySize);
         man.setText("[Vége.]"); man.show()
     });
 

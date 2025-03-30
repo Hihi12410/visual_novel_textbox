@@ -15,7 +15,7 @@ export function drawBg(img, ctx, xSize, ySize) {
 
 export class VisualTextBoxStyle 
 {
-    constructor(x_ratio, y_ratio, w_ratio, h_ratio, window_x, window_y, title, image, imageSize, text, textcolor, font, fontsize, duration, backgroundGradientColor, backgroundGradientRatio, titleCardGradientRatio, ctx, headless)
+    constructor(x_ratio, y_ratio, w_ratio, h_ratio, window_x, window_y, title, image, imageSize, text, textcolor, font, fontsize, delay, backgroundGradientColor, backgroundGradientRatio, titleCardGradientRatio, ctx, headless)
     {
         this.ctx = ctx;
         
@@ -42,7 +42,7 @@ export class VisualTextBoxStyle
         this.textcolor = textcolor;
         this.font = font;
         this.fontsize = fontsize;
-        this.duration = duration;
+        this.delay = delay;
         
         this.backgroundGradient = ctx.createLinearGradient(this.x, this.y, this.x, this.y + this.h);
         this.backgroundGradient.addColorStop(0, backgroundGradientColor);

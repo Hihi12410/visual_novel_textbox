@@ -34,7 +34,7 @@ window.onload = async function () {
     window.onresize += onWindowResize(canvas);
     onWindowResize(canvas);
     
-    const manStyle = new VisualTextBoxStyle(0, 0.8, 1, 0.2, xSize, ySize, "Title", images["manImage"], 100, "Hi", "white", "system-ui", 20, .1, "white", .1, .1, ctx, false);
+    const manStyle = new VisualTextBoxStyle(0, 0.8, 1, 0.2, xSize, ySize, "Title", images["manImage"], 100, "Hi", "white", "system-ui", 20, 50, "white", .1, .1, ctx, false);
     
     const man = new textBox(manStyle);
     const antagonist = new textBox(manStyle);

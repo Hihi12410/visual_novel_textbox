@@ -1,0 +1,21 @@
+{
+    "type":"bg",
+    "backgrounds" : 
+    [ 
+        {
+            "name":"white",
+            "type":"color",
+            "value":"white"
+        },
+        {
+            "name":"arab",
+            "type":"image",
+            "value":"arab"
+        },
+        {
+            "name":"man",
+            "type":"image",
+            "value":"manImage"
+        }
+    ]
+}

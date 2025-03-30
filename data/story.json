@@ -1,0 +1,40 @@
+{
+    "res":
+    {
+        "actors":"./data/actors.json",
+        "images":"./data/data.json",
+        "bgs":"./data/bg.json"
+    },
+
+    "story": 
+    [
+        {
+            "actor":"man",
+            "text":"Szia! Én egy teszt vagyok.",
+            "delay":100,
+            "bg": "arab",
+            "custom_action":""
+        },
+        {
+            "actor":"man",
+            "text":"Amint látod, egy arab országban vagyok.",
+            "delay":100,
+            "bg": "arab",
+            "custom_action":""
+        },
+        {
+            "actor":"man",
+            "text":"Most én vagyok a háttér!",
+            "delay":100,
+            "bg": "man",
+            "custom_action":""
+        },
+        {
+            "actor":"man",
+            "text":"Ez a vége!",
+            "delay":100,
+            "bg": "arab",
+            "custom_action":""
+        }
+    ]
+}

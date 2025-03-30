@@ -15,7 +15,7 @@ export function drawBg(img, ctx, xSize, ySize) {
 
 export class VisualTextBoxStyle 
 {
-    constructor(x_ratio, y_ratio, w_ratio, h_ratio, window_x, window_y, title, image, imageSize, text, textcolor, font, fontsize, delay, backgroundGradientColor, backgroundGradientRatio, titleCardGradientRatio, ctx, headless)
+    constructor(x_ratio, y_ratio, w_ratio, h_ratio, window_x, window_y, title, image, imageSize, textcolor, font, fontsize, delay, backgroundGradientColor, backgroundGradientRatio, titleCardGradientRatio, ctx, headless)
     {
         this.ctx = ctx;
         
@@ -38,7 +38,6 @@ export class VisualTextBoxStyle
         this.image = image;
         this.imageSize = imageSize;
 
-        this.text = text;
         this.textcolor = textcolor;
         this.font = font;
         this.fontsize = fontsize;
@@ -60,10 +59,11 @@ export class VisualTextBoxStyle
 export class textBox {
     constructor(vtbs) {
         this.vtbs = vtbs;
+        this.text = "";
     }
 
     wrapText() {
-        let words = this.vtbs.text.split(" ");
+        let words = this.text.split(" ");
         let lines = [];
         let currentLine = words[0];
         
@@ -84,7 +84,7 @@ export class textBox {
     //Making the overflowing text wrap
     wrapText_monospaced() {
         
-        let words = this.vtbs.text.split(" ");
+        let words = this.text.split(" ");
         let lines = [];
         let currentLine = words[0];
         
@@ -136,7 +136,7 @@ export class textBox {
     
     renderText_allAtOnce() 
     {
-        this.vtbs.ctx.fillStyle = this.vtbs.textcolor;
+        this.vtbs.ctx.fillStyle = this.textcolor;
         let lines = this.wrapText();
         let lineHeight = this.vtbs.fontsize * 1;
         let startY = this.vtbs.y + (this.vtbs.h - lines.length * lineHeight) / 2 + this.vtbs.fontsize;
@@ -191,7 +191,7 @@ export class textBox {
 
     setText(text)
     {
-        this.vtbs.text = text;
+        this.text = text;
     }
     
     show() {

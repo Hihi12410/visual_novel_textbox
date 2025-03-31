@@ -3,38 +3,67 @@
     {
         "actors":"./data/actors.json",
         "images":"./data/data.json",
-        "bgs":"./data/bg.json"
+        "bgs":"./data/bg.json",
+        "custom_actions":"./data/custom_actions.js"
     },
 
-    "story": 
+    "story":
     [
         {
+            "id":"greeting",
             "actor":"man",
-            "text":"Szia! Én egy teszt vagyok.",
+            "text":"Szia! Én nem egy teszt vagyok.",
             "delay":100,
-            "bg": "arab",
-            "custom_action":""
+            "bg": "white",
+            
+            "question":false,
+            "question_id":null,
+            "expected_answer":[null],
+            
+            "conditional_jump":false,
+            "jump_to":null
         },
         {
+            "id":"greeting",
             "actor":"man",
-            "text":"Amint látod, egy arab országban vagyok.",
+            "text":"Szia! Én nem egy teszt vagyok.",
             "delay":100,
             "bg": "arab",
-            "custom_action":""
+            
+            "question":false,
+            "question_id":null,
+            "expected_answer":[null],
+            
+            "conditional_jump":false,
+            "jump_to":null
         },
         {
+            "id":"greeting",
             "actor":"man",
-            "text":"Most én vagyok a háttér!",
+            "text":"Szia! Én nem egy teszt vagyok.",
             "delay":100,
             "bg": "man",
-            "custom_action":""
+            
+            "question":false,
+            "question_id":null,
+            "expected_answer":[null],
+            
+            "conditional_jump":false,
+            "jump_to":null
         },
         {
+            "id":"greeting",
             "actor":"man",
-            "text":"Ez a vége!",
+            "text":"Szia! Én nem egy teszt vagyok.",
             "delay":100,
-            "bg": "arab",
-            "custom_action":""
+            "bg": "white",
+            
+            "question":false,
+            "question_id":null,
+            "expected_answer":[null],
+            
+            "conditional_jump":false,
+            "jump_to":null
         }
     ]
 }

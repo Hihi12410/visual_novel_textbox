@@ -16,6 +16,11 @@
             "name":"man",
             "type":"image",
             "value":"manImage"
+        },
+        {
+            "name":"szép",
+            "type":"image",
+            "value":"szép"
         }
     ]
 }

@@ -122,10 +122,9 @@ export class textBox {
             this.vtbs.ctx.fillRect(imageX, imageY, this.vtbs.imageSize, this.vtbs.imageSize);
 
             this.vtbs.ctx.drawImage(this.vtbs.image, imageX, imageY, this.vtbs.imageSize, this.vtbs.imageSize);
+            this.vtbs.ctx.fillStyle = this.vtbs.textcolor;
+            this.vtbs.ctx.fillText(this.vtbs.title, imageX, imageY+this.vtbs.imageSize);
         }
-
-        this.vtbs.ctx.fillStyle = this.vtbs.textcolor;
-        this.vtbs.ctx.fillText(this.vtbs.title, imageX, imageY+this.vtbs.imageSize);
     }
     
     renderBackground() 

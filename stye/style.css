@@ -6,15 +6,29 @@ html, body
     margin: 0;
     overflow: hidden;
 
+    color: white;
     display: flex;
+
     justify-content: center;
     vertical-align: center;
+    background-color: white;
 }
 
-canvas {
-    background-color: black;
-    width: 100vw;
+#canvas {
+    background-color: transparent;
+    width:100vw;
     height: 100vh;
     background-size: cover;
     background-position: center;
+    z-index: 1;
+}
+
+#tempBuffer 
+{
+    background-color: transparent;
+    width:100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
 }

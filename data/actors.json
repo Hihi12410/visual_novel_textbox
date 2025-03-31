@@ -8,7 +8,7 @@
             "top":0.8,
             "width":1,
             "height":0.2,
-            "title":"Ember",
+            "title":"Péter",
             "image": "manImage",
             "image_size": 300,
             "text_color":"white",
@@ -19,6 +19,25 @@
             "background_gradient_ratio": 0.7,
             "title_card_gradient_ratio" : 0.9,
             "headless":false
+        },
+
+        {
+            "name":"man_2",
+            "left":0,
+            "top":0.4,
+            "width": 0.5,
+            "height":0.1,
+            "title":"Péter",
+            "image": "szép",
+            "image_size": 300,
+            "text_color":"white",
+            "font":"monospace",
+            "font_size":40,
+            "delay":10,
+            "background_gradient_color":"red",
+            "background_gradient_ratio": 1,
+            "title_card_gradient_ratio" : 1,
+            "headless":true
         }
     ]
 }

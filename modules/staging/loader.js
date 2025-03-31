@@ -133,6 +133,7 @@ export class Loader {
 
         return expo;
     }
+
     static async loadActor(link_to_data, images, canvas) 
     {
         let expo = {};

@@ -1,19 +1,22 @@
 import { Loader } from "./loader.js";
 import { stopAllWrite } from '../visual/textbox.js';
-import { applyEase } from "../visual/easing.js";
+import { applyEase, stopAllEase } from "../visual/easing.js";
 
-function onWindowResize(canvas) {
+function onWindowResize(canvas, bgCanvas) {
     const scale = window.devicePixelRatio;
     const width = window.innerWidth;
     const height = window.innerHeight;
     
     canvas.width = width * scale;
     canvas.height = height * scale;   
+    bgCanvas.width = width * scale;
+    bgCanvas.height = height * scale;
+    
 }
 
 export class stageMaster
 {
-    constructor(canvas, story_link) {
+    constructor(canvas,bgCanvas, story_link) {
 
         this.story = null; 
         this.story_link = story_link;
@@ -23,9 +26,11 @@ export class stageMaster
         this.actors = null;
 
         this.canvas = canvas;
+        this.bgCanvas = bgCanvas;
+        this.bgCanvCtx = this.bgCanvas.getContext("2d");
         this.ctx = canvas.getContext("2d");
 
-        onWindowResize(this.canvas);
+        onWindowResize(this.canvas, this.bgCanvas);
 
         this.currentIndex = 0;
 
@@ -62,19 +67,29 @@ export class stageMaster
         }else
         {
             this.storypointer = 0;
+            this.storyPresent();
         }
     }
 
     async storyPresent() 
     {
         stopAllWrite();
-        console.log(this.images);
-        await applyEase.simpleEase(this.ctx, this.images[0],100, 10, 10);
+        stopAllEase();
+        
+        const act = this.story.story[this.storypointer];
+
+        if(act.ease) 
+        {
+            if (act.ease_name == "simple") 
+            {
+                applyEase.simpleEase(this.ctx, this.bgCanvCtx, act.ease_resolution);
+            }
+        }
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        const act = this.story.story[this.storypointer];
         
         this.bgs[act.bg](this.canvas);
+        
         this.actors[act.actor].setText(act.text);
         
         this.actors[act.actor].show();
@@ -91,6 +106,6 @@ export class stageMaster
         this.actors.forEach(actor => {
             actor.onWindowResize();
         });
-        onWindowResize(this.canvas);
+        onWindowResize(this.canvas, this.bgCanvas);
     }   
 }

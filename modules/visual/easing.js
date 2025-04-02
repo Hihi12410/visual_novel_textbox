@@ -1,40 +1,43 @@
-export class applyEase 
-{
+var easeIndex = 0;
 
-    static async __make_ease_bg_buff(img)
+export function stopAllEase() 
+{
+    if (easeIndex < 100000000) 
     {
-        document.body.innerHTML += 
-        `
-            <canvas id="tempBuffer"></canvas>
-        `;
-        const buffer = document.getElementById("tempBuffer");
-        await buffer.getContext("2d").drawImage(img,0,0);
-        return buffer;
+        easeIndex++;
+
+    }else 
+    {
+        easeIndex = 0;
     }
-    
-    static async simpleEase(ctx, next_img, res, time, overlap) 
-    {
+}
+
+export class applyEase {
+    static async simpleEase(ctx, bgCtx, res) {
         const w = ctx.canvas.width;
         const h = ctx.canvas.height;
 
         const stepY = h / res;
 
-        const promises = [];
-        const buff = await this.__make_ease_bg_buff(ctx.canvas);
+        bgCtx.drawImage(ctx.canvas, 0, 0);
+        
+        let currentFrame = res;
+        let currEaseIndex = easeIndex;
+        console.log(currEaseIndex);
 
-        for (let i = 0; i <= res; ++i) 
-        {
-            promises.push(new Promise((resolve, reject)=>
-            {
-                setTimeout(this.__simple_ease, i * time - overlap, ctx, 0, i * stepY, w, stepY, resolve, reject);
-            }));
-        }
-        await Promise.all(promises);
+        const animate = () => {
+            if (currentFrame >= 0) {
+                if (currEaseIndex != easeIndex) return;
+                this.__simple_ease(bgCtx, 0, stepY * currentFrame, w, stepY + 2);
+
+                currentFrame--;
+                requestAnimationFrame(animate);
+            }
+        };
+
+        animate();
     }
-
-    static __simple_ease(ctx, x, y, w, h, resolve ) 
-    {
-        ctx.clearRect(x,y,w+1,h+1);
-        resolve();
+    static __simple_ease(ctx, x, y, w, h) {
+        ctx.clearRect(x, y, w, h);
     }
 }

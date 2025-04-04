@@ -12,13 +12,14 @@
         {
             "id":"0",
             "actor":"man",
-            "text":"Hello Again! A new main build?!?!",
-            "delay":100,
+            "text":"Szia! én vagyok Péter!",
+            "delay":10,
             "bg": "man",
 
             "ease" : true,
             "ease_name" : "simple",
             "ease_resolution" : 100,
+            "ease_reversed" : false,
             
             "question":false,
             "question_id":null,
@@ -29,15 +30,16 @@
         },
         {
             "id":"1",
-            "actor":"man",
-            "text":"Yes, I have added easing.",
-            "delay":100,
-            "bg": "szep",
+            "actor":"woman",
+            "text":"Szia! Én nem péter vagyok",
+            "delay":10,
+            "bg": "arab",
 
             "ease" : true,
             "ease_name" : "simple",
-            "ease_resolution" : 1000,            
-
+            "ease_resolution" : 100,
+            "ease_reversed" : true,
+            
             "question":false,
             "question_id":null,
             "expected_answer":[null],
@@ -48,13 +50,14 @@
         {
             "id":"2",
             "actor":"man",
-            "text":"You can have it on.",
-            "delay":100,
-            "bg": "man",
+            "text":"Engem Péternek hívnak! És téged?",
+            "delay":10,
+            "bg": "szep",
 
             "ease" : true,
-            "ease_name" : "simple",
-            "ease_resolution" : 10,
+            "ease_name" : "cubic",
+            "ease_resolution" : 100,
+            "ease_reversed" : false,
             
             "question":false,
             "question_id":null,
@@ -65,33 +68,16 @@
         },
         {
             "id":"3",
-            "actor":"man",
-            "text":"You can have it off.",
-            "delay":100,
+            "actor":"woman",
+            "text":"Én nem Péter vagyok! Egy öröm volt beszélgetni!",
+            "delay":10,
             "bg": "arab",
 
-            "ease" : false,
-            "ease_name" : null,
-            "ease_resolution" : null,
-            
-            "question":false,
-            "question_id":null,
-            "expected_answer":[null],
-            
-            "conditional_jump":false,
-            "jump_to":null
-        },
-        {
-            "id":"4",
-            "actor":"man",
-            "text":"I prefer it on tho. This version loops too! (Yay)",
-            "delay":100,
-            "bg": "szep",
-
             "ease" : true,
-            "ease_name" : "simple",
+            "ease_name" : "cubic",
             "ease_resolution" : 100,
-
+            "ease_reversed" : true,
+            
             "question":false,
             "question_id":null,
             "expected_answer":[null],

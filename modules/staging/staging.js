@@ -84,8 +84,27 @@ export class stageMaster
         {
             if (act.ease_name == "simple") 
             {
-                applyEase.simpleEase(this.ctx, this.bgCanvCtx, act.ease_resolution);
+                if (act.ease_reversed) 
+                    {
+                        applyEase.simpleEase_reversed(this.ctx, this.bgCanvCtx, act.ease_resolution);
+                    }
+                    else
+                    {
+                        applyEase.simpleEase(this.ctx, this.bgCanvCtx, act.ease_resolution);
+                    }
             }
+
+            if (act.ease_name == "cubic") 
+                {
+                    if (act.ease_reversed) 
+                        {
+                            applyEase.circleEase(this.ctx, this.bgCanvCtx, act.ease_resolution);
+                        }
+                        else
+                        {
+                            applyEase.cubicEase(this.ctx, this.bgCanvCtx, act.ease_resolution);
+                        }
+                }
         }
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -94,7 +113,7 @@ export class stageMaster
         
         this.actors[act.actor].setText(act.text);
         
-        this.actors[act.actor].show();
+        this.actors[act.actor].show(act.delay);
     }
 
     startShow() 

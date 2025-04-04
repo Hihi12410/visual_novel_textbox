@@ -147,7 +147,7 @@ export class textBox {
         }
     }
     
-    renderText_typeWriter() 
+    renderText_typeWriter(delay) 
     {
         this.vtbs.ctx.fillStyle = this.vtbs.textcolor;
         
@@ -163,22 +163,35 @@ export class textBox {
         function write(vtbs)
         {   
             if(curr == writeOrder){
-                const charSize = vtbs.fontsize;
-                const textX = vtbs.x + (vtbs.w - charSize) / 2;
+
                 vtbs.ctx.fillText(lines[i][j], vtbs.fontsize*j, startY + i * lineHeight);
-                
                 if (i < lines.length) 
                     {
                     
                     if (++j < lines[i].length && curr == writeOrder) 
                         {
-                        setTimeout(()=>{write(vtbs);}, vtbs.delay);
+
+                        if (typeof delay === "number") 
+                            {
+                                setTimeout(()=>{write(vtbs);}, delay);
+                            }
+                        else 
+                        {
+                            setTimeout(()=>{write(vtbs);}, vtbs.delay);
+                        }
                     }else
                     {
                         i++; j = 0;
                         if (i < lines.length && curr == writeOrder) 
                             {
-                            setTimeout(()=>{write(vtbs);}, vtbs.delay);
+                            if (typeof delay === "number") 
+                                {
+                                    setTimeout(()=>{write(vtbs);}, delay);
+                                }
+                                else
+                                {
+                                    setTimeout(()=>{write(vtbs);}, vtbs.delay);
+                                }
                         }
                     }
                 }
@@ -193,11 +206,11 @@ export class textBox {
         this.text = text;
     }
     
-    show() {
+    show(delay) {
         this.vtbs.ctx.font = `${this.vtbs.fontsize}px ${this.vtbs.font}`;
         this.renderBackground();
         this.renderTitleCard();
-        this.renderText_typeWriter();
+        this.renderText_typeWriter(delay);
     }
 
     onWindowResize() 

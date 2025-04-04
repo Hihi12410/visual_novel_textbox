@@ -22,22 +22,22 @@
         },
 
         {
-            "name":"man_2",
+            "name":"woman",
             "left":0,
-            "top":0.4,
-            "width": 0.5,
+            "top":0.9,
+            "width": 1,
             "height":0.1,
-            "title":"Péter",
-            "image": "szép",
+            "title":"Nem Péter",
+            "image": "womanImage",
             "image_size": 300,
             "text_color":"white",
-            "font":"monospace",
-            "font_size":40,
+            "font":"serif",
+            "font_size":30,
             "delay":10,
             "background_gradient_color":"red",
             "background_gradient_ratio": 1,
             "title_card_gradient_ratio" : 1,
-            "headless":true
+            "headless":false
         }
     ]
 }

@@ -37,7 +37,7 @@ export class stageMaster
         this.storypointer = 0;
         this.story_length = 0;
 
-
+        this.loaded = false;
     }
     
     async init() 
@@ -56,10 +56,12 @@ export class stageMaster
             console.log("Error initializing stage manager! : " + e);
         }
 
+        this.loaded = true;
     }
 
     progressHook() 
     {
+        if (!this.loaded) return;
         if (this.storypointer < this.story.story.length-1) 
         {
             this.storypointer++;

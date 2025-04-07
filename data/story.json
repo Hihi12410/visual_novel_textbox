@@ -75,7 +75,7 @@
 
             "ease" : true,
             "ease_name" : "cubic",
-            "ease_resolution" : 100,
+            "ease_resolution" : 1000,
             "ease_reversed" : true,
             
             "question":false,
